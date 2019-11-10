@@ -28,9 +28,10 @@ public class CartDetailDao {
 
         try {
             //先检查有这个图书了没？
-            String sql = "SELECT * FROM cart_detail where book_id_ = ?";
+            String sql = "SELECT * FROM cart_detail where book_id_ = ? and user_id_ = ?";
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setLong(1,cartDetail.getBookId());
+            ps.setLong(2,cartDetail.getUserId());
             ResultSet resultSet = ps.executeQuery();
 
             if(resultSet.next()){
@@ -39,19 +40,21 @@ public class CartDetailDao {
                 int count = oldCount +cartDetail.getCount();
                 double oldPrice = resultSet.getDouble("price_");
                 double price = oldPrice + cartDetail.getPrice();
-                sql = "update cart_detail set count_ = ?,price_ = ? where book_id_ = ?";
+                sql = "update cart_detail set count_ = ?,price_ = ? where book_id_ = ? and user_id_ = ?";
                 ps = connection.prepareStatement(sql);
                 ps.setInt(1,count);
                 ps.setDouble(2,price);
                 ps.setLong(3,cartDetail.getBookId());
+                ps.setLong(4,cartDetail.getUserId());
                 ps.execute();
             }else{
                 //没有，做插入操作
-                sql = "INSERT INTO cart_detail(BOOK_ID_, COUNT_, PRICE_) VALUES (?,?,?)";
+                sql = "INSERT INTO cart_detail(BOOK_ID_,USER_ID_, COUNT_, PRICE_) VALUES (?,?,?,?)";
                 ps = connection.prepareStatement(sql);
                 ps.setLong(1, cartDetail.getBookId());
-                ps.setInt(2, cartDetail.getCount());
-                ps.setDouble(3, cartDetail.getPrice());
+                ps.setLong(2,cartDetail.getUserId());
+                ps.setInt(3, cartDetail.getCount());
+                ps.setDouble(4, cartDetail.getPrice());
                 ps.execute();
             }
 
@@ -64,19 +67,20 @@ public class CartDetailDao {
     }
 
     /**
-     * 查询购物车中的所有内容
+     * 查询某用户购物车中的所有内容
      *
      * @return
      */
-    public List<CartDetail> listAll() {
+    public List<CartDetail> listByUserId(Long userId) {
         List<CartDetail> detailList = new ArrayList<>();
 
         Connection connection = DBUtil.getConnection();
 
-        String sql = "select c.*,b.id_ bookId,b.name_ bookName,b.price_ bookPrice from cart_detail c left join book b on c.book_id_ = b.id_";
+        String sql = "select c.*,b.id_ bookId,b.name_ bookName,b.price_ bookPrice from cart_detail c left join book b on c.book_id_ = b.id_ where c.user_id_ = ?";
 
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setLong(1,userId);
             ResultSet resultSet = ps.executeQuery();
             while (resultSet.next()) {
                 CartDetail cartDetail = new CartDetail();
@@ -110,6 +114,24 @@ public class CartDetailDao {
             ps.setLong(1,id);
             ps.execute();
 
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }finally {
+            DBUtil.closeConnection(connection);
+        }
+    }
+
+    /**
+     * 删除所有购物车中的某个book
+     * @param bookId
+     */
+    public void removeByBook(Long bookId){
+        Connection connection = DBUtil.getConnection();
+        String sql = "delete from cart_detail where book_id_ = ?";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setLong(1,bookId);
+            ps.execute();
         } catch (SQLException e) {
             e.printStackTrace();
         }finally {

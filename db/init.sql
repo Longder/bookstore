@@ -14,8 +14,20 @@ create table cart_detail
         constraint shopping_cart_pk
         primary key nonclustered,
     book_id_ bigint,
+    user_id_ bigint,
     count_ int,
     price_ numeric(14,2)
+)
+
+
+create table sys_user
+(
+    id_ bigint identity
+        constraint user_pk
+        primary key nonclustered,
+    name_ varchar(255),
+    login_name_ varchar(255),
+    password_ varchar(255)
 )
 
 

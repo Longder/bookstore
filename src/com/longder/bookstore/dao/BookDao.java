@@ -2,6 +2,7 @@ package com.longder.bookstore.dao;
 
 import com.longder.bookstore.entity.Book;
 import com.longder.bookstore.util.DBUtil;
+import com.sun.corba.se.impl.orb.PrefixParserAction;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -71,5 +72,64 @@ public class BookDao {
             DBUtil.closeConnection(connection);
         }
         return book;
+    }
+
+    /**
+     * 添加一本图书
+     * @param book
+     */
+    public void add(Book book){
+        Connection connection = DBUtil.getConnection();
+        String sql = "INSERT INTO book(name_, price_) VALUES(?,?)";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1,book.getName());
+            ps.setDouble(2,book.getPrice());
+            ps.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }finally {
+            DBUtil.closeConnection(connection);
+        }
+    }
+
+    /**
+     * 更新一本图书
+     * @param book
+     */
+    public void update(Book book){
+        Connection connection = DBUtil.getConnection();
+        String sql = "UPDATE book SET name_ = ?,price_=? where id_ = ?";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1,book.getName());
+            ps.setDouble(2,book.getPrice());
+            ps.setLong(3,book.getId());
+            ps.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }finally {
+            DBUtil.closeConnection(connection);
+        }
+    }
+
+    /**
+     * 删除图书
+     * @param bookId
+     */
+    public void delete(Long bookId){
+        Connection connection = DBUtil.getConnection();
+
+        String sql = "DELETE from book where id_ = ?";
+
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setLong(1,bookId);
+            ps.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }finally {
+            DBUtil.closeConnection(connection);
+        }
     }
 }

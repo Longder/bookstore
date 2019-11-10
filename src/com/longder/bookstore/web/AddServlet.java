@@ -4,6 +4,7 @@ import com.longder.bookstore.dao.BookDao;
 import com.longder.bookstore.dao.CartDetailDao;
 import com.longder.bookstore.entity.Book;
 import com.longder.bookstore.entity.CartDetail;
+import com.longder.bookstore.entity.User;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -25,6 +26,9 @@ public class AddServlet extends HttpServlet {
         Long bookId = Long.valueOf(request.getParameter("bookId"));
         Integer count = Integer.valueOf(request.getParameter("count"));
 
+        //取当前登录用户的id
+        Long userId = ((User)request.getSession().getAttribute("user")).getId();
+
         BookDao bookDao = new BookDao();
         Book book = bookDao.getById(bookId);
 
@@ -32,6 +36,7 @@ public class AddServlet extends HttpServlet {
         cartDetail.setBookId(bookId);
         cartDetail.setCount(count);
         cartDetail.setPrice(book.getPrice() * count);
+        cartDetail.setUserId(userId);
 
         CartDetailDao cartDetailDao = new CartDetailDao();
         cartDetailDao.add(cartDetail);

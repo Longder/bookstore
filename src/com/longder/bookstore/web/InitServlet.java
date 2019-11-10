@@ -15,11 +15,17 @@ public class InitServlet extends HttpServlet {
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         System.out.println("进入Servlet");
-        //查询所有图书
-        BookDao bookDao = new BookDao();
-        List<Book> bookList = bookDao.listAll();
 
-        req.setAttribute("bookList", bookList);
-        req.getRequestDispatcher("/showAllBook.jsp").forward(req, resp);
+        //检查这个用户登录了没，没有登陆就去登录页
+        if(req.getSession().getAttribute("user")==null){
+            resp.sendRedirect(req.getContextPath()+"/");
+        }else{
+            //查询所有图书
+            BookDao bookDao = new BookDao();
+            List<Book> bookList = bookDao.listAll();
+
+            req.setAttribute("bookList", bookList);
+            req.getRequestDispatcher("/showAllBook.jsp").forward(req, resp);
+        }
     }
 }

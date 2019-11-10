@@ -7,7 +7,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <title>购买商品</title>
+    <title>修改图书</title>
 
     <!-- Bootstrap core CSS -->
     <link href="static/css/bootstrap.css" rel="stylesheet">
@@ -16,23 +16,25 @@
 <nav class="navbar navbar-light bg-light">
     <a class="navbar-brand my-0 mr-md-auto font-weight-normal" href="#">
         <img src="${ctx}/static/img/contacts-logo.jpg" width="30" height="30" class="d-inline-block align-top" alt="">
-        确定购买商品
+        修改图书
     </a>
     <a class="p-2 text-dark">欢迎登陆！${user.name}</a>
     <a class="btn btn-outline-primary" href="${ctx}/logout">登出</a>
 </nav>
 <div class="container">
-    <h2 style="margin-top: 100px;">您要购买的是：${book.name}</h2>
-    <h4>书本价格：￥${book.price}</h4>
-    <form class="form-inline" action="${ctx}/add" method="post">
-        <div class="form-group mb-2">
-            <label>数量：</label>
+    <h2 style="margin-top: 100px;">修改图书</h2>
+    <form method="post" action="${ctx}/updateBook">
+        <input type="hidden" name="id" value="${book.id}"/>
+        <div class="form-group">
+            <label>图书名称</label>
+            <input name="name" type="text" class="form-control" placeholder="图书名称" value="${book.name}">
         </div>
-        <div class="form-group mx-sm-3 mb-2">
-            <input type="hidden" name="bookId" value="${book.id}" />
-            <input type="number" class="form-control" value="1" name="count"/>
+        <div class="form-group">
+            <label>价格（￥）</label>
+            <input name="price" type="number" class="form-control" placeholder="价格" value="${book.price}">
         </div>
-        <button type="submit" class="btn btn-primary mb-2">确定购买</button>
+        <button type="submit" class="btn btn-primary">保存</button>
+        <a href="${ctx}/listBook" class="btn btn-outline-dark">返回</a>
     </form>
 </div>
 </body>

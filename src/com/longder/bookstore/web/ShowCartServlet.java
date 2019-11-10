@@ -2,6 +2,7 @@ package com.longder.bookstore.web;
 
 import com.longder.bookstore.dao.CartDetailDao;
 import com.longder.bookstore.entity.CartDetail;
+import com.longder.bookstore.entity.User;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -19,9 +20,10 @@ public class ShowCartServlet extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
 
-        //查询购物车中的所有内容
+        //查询当前登录用户购物车中的所有内容
         CartDetailDao cartDetailDao = new CartDetailDao();
-        List<CartDetail> detailList = cartDetailDao.listAll();
+        Long userId = ((User)request.getSession().getAttribute("user")).getId();
+        List<CartDetail> detailList = cartDetailDao.listByUserId(userId);
 
         //计算总价
         Double total = 0D;
