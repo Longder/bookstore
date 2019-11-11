@@ -17,15 +17,11 @@ public class InitServlet extends HttpServlet {
         System.out.println("进入Servlet");
 
         //检查这个用户登录了没，没有登陆就去登录页
-        if(req.getSession().getAttribute("user")==null){
-            resp.sendRedirect(req.getContextPath()+"/");
-        }else{
-            //查询所有图书
-            BookDao bookDao = new BookDao();
-            List<Book> bookList = bookDao.listAll();
+        //查询所有图书
+        BookDao bookDao = new BookDao();
+        List<Book> bookList = bookDao.listAll();
 
-            req.setAttribute("bookList", bookList);
-            req.getRequestDispatcher("/showAllBook.jsp").forward(req, resp);
-        }
+        req.setAttribute("bookList", bookList);
+        req.getRequestDispatcher("/showAllBook.jsp").forward(req, resp);
     }
 }

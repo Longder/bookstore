@@ -23,7 +23,7 @@
 </nav>
 <div class="container">
     <h2 style="margin-top: 100px;">新增图书</h2>
-    <form method="post" action="${ctx}/addBook">
+    <form method="post" action="${ctx}/addBook" enctype="multipart/form-data">
         <div class="form-group">
             <label>图书名称</label>
             <input name="name" type="text" class="form-control" placeholder="图书名称">
@@ -31,6 +31,10 @@
         <div class="form-group">
             <label>价格（￥）</label>
             <input name="price" type="number" class="form-control" placeholder="价格">
+        </div>
+        <div class="form-group">
+            <label>图片</label>
+            <input name="image" type="file" class="form-control"/>
         </div>
         <button type="submit" class="btn btn-primary">保存</button>
         <a href="${ctx}/listBook" class="btn btn-outline-dark">返回</a>
