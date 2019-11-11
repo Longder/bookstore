@@ -4,6 +4,7 @@ create table book
         constraint book_pk
         primary key nonclustered,
     name_ varchar(255),
+    image_ varchar(max),
     price_ numeric(14,2)
 )
 

@@ -14,12 +14,14 @@ public class InitServlet extends HttpServlet {
 
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println("进入Servlet");
+        req.setCharacterEncoding("UTF-8");
+        resp.setCharacterEncoding("UTF-8");
 
-        //检查这个用户登录了没，没有登陆就去登录页
+
+        String bookName = req.getParameter("bookName");
         //查询所有图书
         BookDao bookDao = new BookDao();
-        List<Book> bookList = bookDao.listAll();
+        List<Book> bookList = bookDao.listAll(bookName);
 
         req.setAttribute("bookList", bookList);
         req.getRequestDispatcher("/showAllBook.jsp").forward(req, resp);

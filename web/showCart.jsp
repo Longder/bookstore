@@ -48,7 +48,7 @@
         </tbody>
     </table>
     <h5>总价：￥${total}</h5>
-    <h4><a href="${ctx}/index">继续购物</a></h4>
+    <h4><a href="${ctx}/index">返回购物</a></h4>
 </div>
 
 </body>

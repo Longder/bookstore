@@ -14,7 +14,7 @@ public class LogoutServlet extends HttpServlet {
     protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         //清空session中的用户信息
         request.getSession().setAttribute("user",null);
-        //重定向到登录页
-        response.sendRedirect(request.getContextPath()+"/");
+        //重定向到主页
+        response.sendRedirect(request.getContextPath()+"/index");
     }
 }

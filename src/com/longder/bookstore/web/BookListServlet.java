@@ -18,7 +18,7 @@ public class BookListServlet extends HttpServlet {
     protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         BookDao bookDao = new BookDao();
         //查询所有的图书
-        List<Book> bookList = bookDao.listAll();
+        List<Book> bookList = bookDao.listAll(null);
         request.setAttribute("bookList", bookList);
         request.getRequestDispatcher("/listBook.jsp").forward(request, response);
     }

@@ -23,15 +23,24 @@
 </nav>
 <div class="container">
     <h2 style="margin-top: 100px;">修改图书</h2>
-    <form method="post" action="${ctx}/updateBook">
+    <form method="post" action="${ctx}/updateBook" enctype="multipart/form-data">
         <input type="hidden" name="id" value="${book.id}"/>
         <div class="form-group">
             <label>图书名称</label>
-            <input name="name" type="text" class="form-control" placeholder="图书名称" value="${book.name}">
+            <input name="name" type="text" class="form-control" placeholder="图书名称" value="${book.name}" required>
         </div>
         <div class="form-group">
             <label>价格（￥）</label>
-            <input name="price" type="number" class="form-control" placeholder="价格" value="${book.price}">
+            <input name="price" type="number" class="form-control" placeholder="价格" value="${book.price}" required>
+        </div>
+        <div class="form-group">
+            <label>图片：</label>
+            <br/>
+            <img src="${book.image}"/>
+        </div>
+        <div class="form-group">
+            <label>上传图片</label>
+            <input name="image" type="file" class="form-control"/>
         </div>
         <button type="submit" class="btn btn-primary">保存</button>
         <a href="${ctx}/listBook" class="btn btn-outline-dark">返回</a>
