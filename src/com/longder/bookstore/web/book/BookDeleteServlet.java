@@ -1,4 +1,4 @@
-package com.longder.bookstore.web;
+package com.longder.bookstore.web.book;
 
 import com.longder.bookstore.dao.BookDao;
 import com.longder.bookstore.dao.CartDetailDao;

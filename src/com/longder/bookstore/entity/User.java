@@ -3,7 +3,7 @@ package com.longder.bookstore.entity;
 /**
  * 用户表
  */
-public class User extends BaseIdEntity{
+public class User extends BaseIdEntity {
 
     /**
      * 姓名
@@ -19,6 +19,11 @@ public class User extends BaseIdEntity{
      * 登陆 密码
      */
     private String password;
+
+    /**
+     * 用户类型
+     */
+    private String type;
 
     public String getName() {
         return name;
@@ -42,5 +47,13 @@ public class User extends BaseIdEntity{
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }

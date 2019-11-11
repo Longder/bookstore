@@ -28,6 +28,7 @@ create table sys_user
         primary key nonclustered,
     name_ varchar(255),
     login_name_ varchar(255),
+    type_ varchar(255),
     password_ varchar(255)
 )
 

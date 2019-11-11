@@ -24,17 +24,19 @@ public class RegisterServlet extends HttpServlet {
         UserDao userDao = new UserDao();
         //检查登录名是否存在
         User user = userDao.getByLoginName(loginName);
-        if(user != null){
-            request.setAttribute("message","登录名已存在");
-            request.getRequestDispatcher("/register.jsp").forward(request,response);
-        }else{
+        if (user != null) {
+            request.setAttribute("message", "登录名已存在");
+            request.getRequestDispatcher("/register.jsp").forward(request, response);
+        } else {
             user = new User();
             user.setLoginName(loginName);
             user.setName(name);
             user.setPassword(password);
+            //类型set为普通用户
+            user.setType("user");
             userDao.add(user);
-            request.setAttribute("message","注册成功");
-            request.getRequestDispatcher("/register.jsp").forward(request,response);
+            request.setAttribute("message", "注册成功");
+            request.getRequestDispatcher("/register.jsp").forward(request, response);
         }
     }
 }

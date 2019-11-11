@@ -1,4 +1,4 @@
-package com.longder.bookstore.web;
+package com.longder.bookstore.web.book;
 
 import com.longder.bookstore.dao.BookDao;
 import com.longder.bookstore.entity.Book;
@@ -8,21 +8,18 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 
 /**
- * 去更新图书页的Servlet
+ * 后台图书列表的servlet
  */
-public class ToUpdateBookServlet extends HttpServlet {
+public class BookListServlet extends HttpServlet {
     @Override
     protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setCharacterEncoding("UTF-8");
-        response.setCharacterEncoding("UTF-8");
-
-        Long bookId = Long.valueOf(request.getParameter("id"));
-
         BookDao bookDao = new BookDao();
-        Book book = bookDao.getById(bookId);
-        request.setAttribute("book",book);
-        request.getRequestDispatcher("/updateBook.jsp").forward(request,response);
+        //查询所有的图书
+        List<Book> bookList = bookDao.listAll(null);
+        request.setAttribute("bookList", bookList);
+        request.getRequestDispatcher("/listBook.jsp").forward(request, response);
     }
 }

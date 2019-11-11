@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
     <welcome-file-list>
-        <welcome-file>/index</welcome-file>
+        <welcome-file>index</welcome-file>
     </welcome-file-list>
 
     <servlet>
@@ -81,7 +81,7 @@
 
     <servlet>
         <servlet-name>listBook</servlet-name>
-        <servlet-class>com.longder.bookstore.web.BookListServlet</servlet-class>
+        <servlet-class>com.longder.bookstore.web.book.BookListServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>listBook</servlet-name>
@@ -90,7 +90,7 @@
 
     <servlet>
         <servlet-name>addBook</servlet-name>
-        <servlet-class>com.longder.bookstore.web.BookAddServlet</servlet-class>
+        <servlet-class>com.longder.bookstore.web.book.BookAddServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>addBook</servlet-name>
@@ -99,7 +99,7 @@
 
     <servlet>
         <servlet-name>toUpdateBook</servlet-name>
-        <servlet-class>com.longder.bookstore.web.ToUpdateBookServlet</servlet-class>
+        <servlet-class>com.longder.bookstore.web.book.ToUpdateBookServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>toUpdateBook</servlet-name>
@@ -108,7 +108,7 @@
 
     <servlet>
         <servlet-name>updateBook</servlet-name>
-        <servlet-class>com.longder.bookstore.web.BookUpdateServlet</servlet-class>
+        <servlet-class>com.longder.bookstore.web.book.BookUpdateServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>updateBook</servlet-name>
@@ -117,10 +117,55 @@
 
     <servlet>
         <servlet-name>deleteBook</servlet-name>
-        <servlet-class>com.longder.bookstore.web.BookDeleteServlet</servlet-class>
+        <servlet-class>com.longder.bookstore.web.book.BookDeleteServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>deleteBook</servlet-name>
         <url-pattern>/deleteBook</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>listUser</servlet-name>
+        <servlet-class>com.longder.bookstore.web.user.UserListServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>listUser</servlet-name>
+        <url-pattern>/listUser</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>addUser</servlet-name>
+        <servlet-class>com.longder.bookstore.web.user.UserAddServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>addUser</servlet-name>
+        <url-pattern>/addUser</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>deleteUser</servlet-name>
+        <servlet-class>com.longder.bookstore.web.user.UserDeleteServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>deleteUser</servlet-name>
+        <url-pattern>/deleteUser</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>toUpdateUser</servlet-name>
+        <servlet-class>com.longder.bookstore.web.user.ToUpdateUserServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>toUpdateUser</servlet-name>
+        <url-pattern>/toUpdateUser</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>updateUser</servlet-name>
+        <servlet-class>com.longder.bookstore.web.user.UpdateUserServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>updateUser</servlet-name>
+        <url-pattern>/updateUser</url-pattern>
     </servlet-mapping>
 </web-app>

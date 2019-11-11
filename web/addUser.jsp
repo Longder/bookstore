@@ -7,7 +7,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <title>新增图书</title>
+    <title>新增用户</title>
 
     <!-- Bootstrap core CSS -->
     <link href="static/css/bootstrap.css" rel="stylesheet">
@@ -41,22 +41,23 @@
             </div>
         </nav>
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-            <h2>新增图书</h2>
-            <form method="post" action="${ctx}/addBook" enctype="multipart/form-data">
+            <h2>新增用户</h2>
+            <form method="post" action="${ctx}/addUser">
                 <div class="form-group">
-                    <label>图书名称</label>
-                    <input name="name" type="text" class="form-control" placeholder="图书名称" required>
+                    <label>用户登录名</label>
+                    <input name="loginName" type="text" class="form-control" placeholder="登录名" required>
                 </div>
                 <div class="form-group">
-                    <label>价格（￥）</label>
-                    <input name="price" type="number" class="form-control" placeholder="价格" required/>
+                    <label>用户姓名</label>
+                    <input name="name" type="text" class="form-control" placeholder="姓名" required/>
                 </div>
                 <div class="form-group">
-                    <label>上传图片</label>
-                    <input name="image" type="file" class="form-control" required/>
+                    <label>密码</label>
+                    <input name="password" type="password" class="form-control" required/>
                 </div>
+                <p>${message}</p>
                 <button type="submit" class="btn btn-primary">保存</button>
-                <a href="${ctx}/listBook" class="btn btn-outline-dark">返回</a>
+                <a href="${ctx}/listUser" class="btn btn-outline-dark">返回</a>
             </form>
         </main>
     </div>

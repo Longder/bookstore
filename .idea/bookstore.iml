@@ -21,6 +21,6 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="lib" level="project" />
-    <orderEntry type="library" name="tomcat7-api" level="project" />
+    <orderEntry type="library" name="Tomcat7-api" level="project" />
   </component>
 </module>

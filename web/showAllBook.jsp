@@ -24,7 +24,9 @@
     <div class="my-2 my-md-0 mr-md-3">
         <c:if test="${!empty user}">
             <a class="p-2 text-dark" href="${ctx}/showCart">我的购物车</a>
-            <a class="p-2 text-dark" href="${ctx}/listBook">后台管理</a>
+            <c:if test="${user.type=='admin'}">
+                <a class="p-2 text-dark" href="${ctx}/listBook">后台管理</a>
+            </c:if>
         </c:if>
     </div>
     <c:choose>
@@ -61,35 +63,17 @@
                         <p class="card-text"><strong>${book.name}</strong></p>
                         <p class="card-text">价格：￥${book.price}</p>
                         <div class="d-flex justify-content-between align-items-center">
-                            <div class="btn-group">
-                                <a href="${ctx}/toBuy?id=${book.id}" class="btn btn-sm btn-warning">购买</a>
-                            </div>
+                            <c:if test="${!empty user&&user.type=='user'}">
+                                <div class="btn-group">
+                                    <a href="${ctx}/toBuy?id=${book.id}" class="btn btn-sm btn-warning">购买</a>
+                                </div>
+                            </c:if>
                         </div>
                     </div>
                 </div>
             </div>
         </c:forEach>
     </div>
-    <%--    <table class="table table-bordered">--%>
-    <%--        <thead>--%>
-    <%--        <tr>--%>
-    <%--            <th scope="col">书本名称</th>--%>
-    <%--            <th scope="col">书本价格</th>--%>
-    <%--            <th scope="col">操作</th>--%>
-    <%--        </tr>--%>
-    <%--        </thead>--%>
-    <%--        <tbody>--%>
-    <%--        <c:forEach items="${bookList}" var="book">--%>
-    <%--            <tr>--%>
-    <%--                <td>${book.name}</td>--%>
-    <%--                <td>￥${book.price}</td>--%>
-    <%--                <td>--%>
-    <%--                    <a href="${ctx}/toBuy?id=${book.id}" class="btn btn-warning btn-sm">购买</a>--%>
-    <%--                </td>--%>
-    <%--            </tr>--%>
-    <%--        </c:forEach>--%>
-    <%--        </tbody>--%>
-    <%--    </table>--%>
 </div>
 </body>
 </html>

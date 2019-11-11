@@ -7,7 +7,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <title>图书管理</title>
+    <title>用户管理</title>
 
     <!-- Bootstrap core CSS -->
     <link href="static/css/bootstrap.css" rel="stylesheet">
@@ -41,25 +41,38 @@
             </div>
         </nav>
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-            <h2>图书列表</h2>
-            <h4><a href="${ctx}/addBook.jsp">新增图书</a></h4>
+            <h2>用户列表</h2>
+            <h4><a href="${ctx}/addUser.jsp">新增用户</a></h4>
             <table class="table table-bordered">
                 <thead>
                 <tr>
-                    <th scope="col">书本名称</th>
-                    <th scope="col">书本价格</th>
+                    <th scope="col">登录名</th>
+                    <th scope="col">姓名</th>
+                    <th scope="col">用户类型</th>
                     <th scope="col">操作</th>
                 </tr>
                 </thead>
                 <tbody>
-                <c:forEach items="${bookList}" var="book">
+                <c:forEach items="${userList}" var="user">
                     <tr>
-                        <td>${book.name}</td>
-                        <td>￥${book.price}</td>
+                        <td>${user.loginName}</td>
+                        <td>${user.name}</td>
                         <td>
-                            <a class="btn btn-success btn-sm" href="${ctx}/toUpdateBook?id=${book.id}">编辑</a>
-                            <a class="btn btn-danger btn-sm" href="${ctx}/deleteBook?id=${book.id}"
-                               onclick="return confirm('确定删除图书：${book.name}吗？')">删除</a>
+                            <c:choose>
+                                <c:when test="${user.type=='admin'}">
+                                    <span class="badge badge-primary">管理员</span>
+                                </c:when>
+                                <c:when test="${user.type=='user'}">
+                                    <span class="badge badge-success">普通用户</span>
+                                </c:when>
+                            </c:choose>
+                        </td>
+                        <td>
+                            <a class="btn btn-success btn-sm" href="${ctx}/toUpdateUser?id=${user.id}">编辑</a>
+                            <c:if test="${user.type=='user'}">
+                                <a class="btn btn-danger btn-sm" href="${ctx}/deleteUser?id=${user.id}"
+                                   onclick="return confirm('确定删除用户：${user.name}吗？')">删除</a>
+                            </c:if>
                         </td>
                     </tr>
                 </c:forEach>
